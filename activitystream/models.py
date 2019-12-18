@@ -5,7 +5,6 @@ from django.utils.translation import gettext_lazy as _
 class Post(models.Model):
     content = models.TextField(blank=False)
     user = models.ForeignKey(User, blank=False, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='uploads/% Y/% m/% d/', default=None, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
 
