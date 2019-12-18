@@ -10,12 +10,14 @@ class Post(models.Model):
     updated_timestamp = models.DateTimeField(auto_now=True)
 
 class Comment(models.Model):
+    user = models.ForeignKey(User, blank=False, on_delete=models.CASCADE)
     content = models.TextField(blank=False)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
 
 class Upvote(models.Model):
+    user = models.ForeignKey(User, blank=False, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
 
@@ -37,5 +39,9 @@ class Following(models.Model):
     target_user = models.ForeignKey(User,related_name='targeruser', blank=False, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+class Feed(models.Model):
+    user = models.ForeignKey(User, blank=False, on_delete=models.CASCADE)
+    post =  models.ForeignKey(Post, default=None, blank=True, null=True, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
 
